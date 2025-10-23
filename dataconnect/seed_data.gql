@@ -1,0 +1,28 @@
+mutation SeedMedicationData @auth(level: USER) {
+  medication_insertMany(data: [
+    {
+      name: "Amoxicillin",
+      dosage: "250mg",
+      frequency: "Twice Daily",
+      instructions: "Take with food",
+      isActive: true,
+      startDate: "2024-01-01",
+      endDate: "2024-01-10",
+      pharmacy: "CVS",
+      rxNumber: "12345",
+      userId: "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      name: "Lisinopril",
+      dosage: "10mg",
+      frequency: "Once Daily",
+      instructions: "Take in the morning",
+      isActive: true,
+      startDate: "2023-12-01",
+      endDate: "2024-12-01",
+      pharmacy: "Walgreens",
+      rxNumber: "67890",
+      userId: "550e8400-e29b-41d4-a716-446655440001"
+    }
+  ])
+}

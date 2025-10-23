@@ -1,0 +1,46 @@
+type User @table {
+  email: String!
+  passwordHash: String!
+  createdAt: Timestamp!
+  firstName: String
+  lastName: String
+  lastLogin: Timestamp
+}
+
+type Medication @table {
+  user: User
+  name: String!
+  dosage: String!
+  frequency: String!
+  startDate: Date!
+  isActive: Boolean!
+  instructions: String
+  endDate: Date
+  rxNumber: String
+  pharmacy: String
+}
+
+type Reminder @table {
+  medication: Medication
+  time: String!
+  dayOfWeek: String!
+  type: String!
+  notes: String
+}
+
+type LogEntry @table {
+  medication: Medication
+  user: User
+  timestamp: Timestamp!
+  status: String!
+  notes: String
+}
+
+type HealthcareProvider @table {
+  user: User
+  name: String!
+  specialty: String!
+  phoneNumber: String
+  email: String
+  address: String
+}

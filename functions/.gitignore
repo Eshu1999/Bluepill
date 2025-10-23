@@ -1,0 +1,13 @@
+# Dependencies
+/node_modules
+/lib
+
+# Firebase
+.firebase
+*.log
+
+# Next.js cache
+/.next/
+
+# Mac
+.DS_Store

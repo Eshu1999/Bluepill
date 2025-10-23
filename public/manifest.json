@@ -1,0 +1,21 @@
+{
+  "name": "Medisure",
+  "short_name": "Medisure",
+  "description": "Your personal medication assistant",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4F0F8",
+  "theme_color": "#B19CD9",
+  "icons": [
+    {
+      "src": "logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-firebaseui/package.json b/node_modules/react-firebaseui/package.json
+index 59619b0..9323689 100644
+--- a/node_modules/react-firebaseui/package.json
++++ b/node_modules/react-firebaseui/package.json
+@@ -69,6 +69,6 @@
+     "url": "https://github.com/firebase/firebaseui-web-react/issues"
+   },
+   "peerDependencies": {
+-    "react": ">=15 <=17"
++    "react": ">=15 <=17 || ^18.0.0"
+   }
+ }

@@ -1,0 +1,6 @@
+{
+  "firebase_hosting": {
+    "deploymentHostingUrl": "https://medisure-i42u7.web.app"
+  },
+  "cloud_run_deploy": {}
+}

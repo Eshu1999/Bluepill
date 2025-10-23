@@ -1,0 +1,32 @@
+mutation CreateNewUser @auth(level: PUBLIC) {
+  user_insert(data: {
+    email: "newuser@example.com",
+    passwordHash: "hashed_password",
+    createdAt_expr: "request.time"
+  })
+}
+
+query ListAllMedications @auth(level: USER) {
+  medications {
+    id
+    name
+    dosage
+    frequency
+  }
+}
+
+mutation UpdateMedicationDosage($id: UUID!, $dosage: String!) @auth(level: USER) {
+  medication_update(
+    key: { id: $id }
+    data: { dosage: $dosage }
+  )
+}
+
+query GetMedicationReminders($medicationId: UUID!) @auth(level: USER) {
+  reminders(where: { medicationId: { eq: $medicationId } }) {
+    id
+    time
+    dayOfWeek
+    type
+  }
+}
