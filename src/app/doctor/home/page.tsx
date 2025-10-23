@@ -86,6 +86,12 @@ const DoctorHomePageContent = ({ user, profile }: { user: AuthUser, profile: Use
                                     <span>Home</span>
                                 </SidebarMenuButton>
                             </a>
+                             <a href="/doctor/inventory">
+                                <SidebarMenuButton>
+                                    <Package />
+                                    <span>Inventory</span>
+                                </SidebarMenuButton>
+                            </a>
                              <a href="/family">
                                 <SidebarMenuButton>
                                     <Users />
@@ -177,10 +183,10 @@ const DoctorHomePageContent = ({ user, profile }: { user: AuthUser, profile: Use
                                 onClick={() => router.push('/family')}
                             />
                             <QuickAccessCard 
-                                title="View Profile"
-                                description="Update your professional details"
-                                icon={<User className="h-6 w-6 text-primary" />}
-                                onClick={() => router.push('/profile')}
+                                title="Manage Inventory"
+                                description="Update your sample stock"
+                                icon={<Package className="h-6 w-6 text-primary" />}
+                                onClick={() => router.push('/doctor/inventory')}
                             />
                       </div>
                       <div>
