@@ -4,13 +4,13 @@ import { getAuth, GoogleAuthProvider, sendEmailVerification, signInWithPopup, ge
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  "projectId": "medisure-i42u7",
-  "appId": "1:127262973265:web:385317266925e457a88770",
-  "apiKey": "AIzaSyAusLnhkOqLsTmG9q-wgE63z7_86lGl8v0",
-  "authDomain": "medisure-i42u7.firebaseapp.com",
-  "measurementId": "G-HQ1Z53WKDR",
-  "messagingSenderId": "127262973265",
-  "storageBucket": "medisure-i42u7.appspot.com"
+  "projectId": process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  "appId": process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  "apiKey": process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  "authDomain": process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  "measurementId": process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  "messagingSenderId": process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  "storageBucket": process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
 };
 
 

@@ -6,7 +6,7 @@ import '@/lib/firebase-admin-init'; // Ensure admin SDK is initialized before pl
 export const ai = genkit({
   plugins: [
     googleAI({
-      apiKey: process.env.GENKIT_API_KEY || 'optional-key',
+      apiKey: process.env.GENKIT_API_KEY,
     }),
   ],
 });
