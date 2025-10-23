@@ -74,7 +74,16 @@ export const MyMedicinePageContent = ({ user, profile, familyProfiles }: { user:
                                     <span>Profile</span>
                                 </SidebarMenuButton>
                             </a>
-                             {!isDoctor ? (
+                             {isDoctor ? (
+                                <>
+                                     <a href="/doctor/home">
+                                        <SidebarMenuButton>
+                                            <Home />
+                                            <span>Home</span>
+                                        </SidebarMenuButton>
+                                    </a>
+                                </>
+                             ) : (
                                 <>
                                     <a href="/mymedicine">
                                         <SidebarMenuButton isActive={true}>
@@ -95,20 +104,11 @@ export const MyMedicinePageContent = ({ user, profile, familyProfiles }: { user:
                                         </SidebarMenuButton>
                                     </a>
                                 </>
-                             ) : (
-                                <>
-                                     <a href="/doctor/home">
-                                        <SidebarMenuButton>
-                                            <Home />
-                                            <span>Home</span>
-                                        </SidebarMenuButton>
-                                    </a>
-                                </>
                              )}
                             <a href="/family">
                                 <SidebarMenuButton>
                                     <Users />
-                                    <span>Family</span>
+                                    <span>{isDoctor ? 'Patients' : 'Family'}</span>
                                 </SidebarMenuButton>
                             </a>
                              <a href="/notifications">

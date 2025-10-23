@@ -24,7 +24,11 @@ export function FamilyPageContent({ currentUser, profile, family }: { currentUse
         router.replace('/');
     }
     
-    const isChemist = profile.accountType === 'chemist';
+    const isDoctor = profile.accountType === 'doctor';
+    const pageTitle = isDoctor ? 'Patients' : 'Family';
+    const emptyStateTitle = isDoctor ? 'No patients yet' : 'No family members yet';
+    const emptyStateDescription = isDoctor ? "Patients you connect with will appear here." : "Scan a family member's QR code to connect.";
+
 
     const UserList = ({ title, users }: { title: string, users: UserProfile[]}) => (
         <Card>
@@ -54,8 +58,8 @@ export function FamilyPageContent({ currentUser, profile, family }: { currentUse
                 ) : (
                     <div className="text-center py-16 border-2 border-dashed rounded-lg">
                         <Users className="mx-auto h-12 w-12 text-muted-foreground" />
-                        <h3 className="mt-4 text-lg font-medium text-muted-foreground">No family members yet</h3>
-                        <p className="mt-1 text-sm text-muted-foreground">Scan a family member's QR code to connect.</p>
+                        <h3 className="mt-4 text-lg font-medium text-muted-foreground">{emptyStateTitle}</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">{emptyStateDescription}</p>
                         <Button className="mt-4" onClick={() => router.push('/scan')}>Scan Code</Button>
                     </div>
                 )}
@@ -75,7 +79,16 @@ export function FamilyPageContent({ currentUser, profile, family }: { currentUse
                                     <span>Profile</span>
                                 </SidebarMenuButton>
                             </a>
-                             {!isChemist ? (
+                             {isDoctor ? (
+                                <>
+                                     <a href="/doctor/home">
+                                        <SidebarMenuButton>
+                                            <Home />
+                                            <span>Home</span>
+                                        </SidebarMenuButton>
+                                    </a>
+                                </>
+                             ) : (
                                 <>
                                      <a href="/mymedicine">
                                         <SidebarMenuButton>
@@ -96,26 +109,11 @@ export function FamilyPageContent({ currentUser, profile, family }: { currentUse
                                         </SidebarMenuButton>
                                     </a>
                                 </>
-                             ) : (
-                                <>
-                                     <a href="/chemist/home">
-                                        <SidebarMenuButton>
-                                            <Home />
-                                            <span>Home</span>
-                                        </SidebarMenuButton>
-                                    </a>
-                                    <a href="/chemist/inventory">
-                                        <SidebarMenuButton>
-                                            <Package />
-                                            <span>Inventory</span>
-                                        </SidebarMenuButton>
-                                    </a>
-                                </>
                              )}
                             <a href="/family">
                                 <SidebarMenuButton isActive={true}>
                                     <Users />
-                                    <span>Family</span>
+                                    <span>{pageTitle}</span>
                                 </SidebarMenuButton>
                             </a>
                              <a href="/notifications">
@@ -170,9 +168,9 @@ export function FamilyPageContent({ currentUser, profile, family }: { currentUse
                             <Button variant="ghost" size="icon" onClick={() => router.back()} className="mr-4">
                                 <ArrowLeft />
                             </Button>
-                            <h1 className="text-3xl font-bold tracking-tight font-headline">Family</h1>
+                            <h1 className="text-3xl font-bold tracking-tight font-headline">{pageTitle}</h1>
                         </div>
-                        <UserList title="Family Members" users={family} />
+                        <UserList title={`${pageTitle}`} users={family} />
                     </div>
                 </main>
             </SidebarInset>

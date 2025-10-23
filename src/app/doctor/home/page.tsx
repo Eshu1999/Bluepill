@@ -184,7 +184,7 @@ const DoctorHomePageContent = ({ user, profile }: { user: AuthUser, profile: Use
                             />
                       </div>
                       <div>
-                          <h2 className="text-2xl font-bold tracking-tight font-headline mb-4">Pending Requests</h2>
+                          <h2 className="text-2xl font-bold tracking-tight font-headline mb-4">Medication Requests</h2>
                           <ChemistRequestList user={user} />
                       </div>
                   </div>
