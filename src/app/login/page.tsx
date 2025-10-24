@@ -2,10 +2,11 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import { auth, googleProvider, signInWithRedirect } from '@/lib/firebase';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
-import { Loader2, Mail } from 'lucide-react';
+import { Loader2, Mail, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '../auth-provider';
@@ -66,6 +67,19 @@ export default function LoginPage() {
                         Sign in with Google
                     </Button>
                 </CardContent>
+                 <CardFooter className="flex-col space-y-4">
+                        <div className="relative flex w-full items-center">
+                            <div className="flex-grow border-t border-muted"></div>
+                            <span className="flex-shrink mx-4 text-xs uppercase text-muted-foreground">Or</span>
+                            <div className="flex-grow border-t border-muted"></div>
+                        </div>
+                        <Button asChild variant="secondary" className="w-full">
+                           <Link href="/admin/login">
+                                <Shield className="mr-2 h-4 w-4" />
+                                Admin Test Login
+                           </Link>
+                        </Button>
+                    </CardFooter>
                 </Card>
             </div>
         </div>
