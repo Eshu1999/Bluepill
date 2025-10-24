@@ -5,3 +5,17 @@ runConfig:
   # Increase this value if you'd like to automatically spin up
   # more instances in response to increased traffic.
   maxInstances: 1
+firebase:
+  # These are the environment variables that will be available to your
+  # application. The values are stored in Google Secret Manager.
+  # For more information, see:
+  # https://firebase.google.com/docs/app-hosting/configure#set-secrets
+  env:
+    # This is the API key for your Firebase project.
+    # It is used by the Firebase client-side SDKs.
+    - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+      secret: FIREBASE_API_KEY
+    # This is the API key for your Genkit project.
+    # It is used by the Genkit SDK to access Google AI models.
+    - variable: GENKIT_API_KEY
+      secret: GENKIT_API_KEY
