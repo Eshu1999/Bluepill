@@ -15,6 +15,13 @@ export default function LandingPage() {
   const { user, profile, loading } = useAuth();
 
   React.useEffect(() => {
+    // Diagnostic check for Firebase configuration
+    if (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID) {
+      console.log('✅ Firebase SDK Configuration: Project ID found. Config is likely loaded correctly.');
+    } else {
+      console.error('❌ Firebase SDK Configuration: Project ID is missing. Environment variables are not loaded.');
+    }
+    
     if (!loading) {
       if (user && profile) {
         // If user is already logged in and has a profile, redirect them
