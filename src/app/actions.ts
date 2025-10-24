@@ -54,6 +54,9 @@ export async function createAdminSession(accountType: 'normal' | 'doctor') {
 
         await setDoc(doc(db, 'profiles', user.uid), profileData);
         
+        // Set custom claims
+        await auth.setCustomUserClaims(user.uid, { accountType: accountType });
+        
         // Create a custom token for the new user
         const customToken = await auth.createCustomToken(user.uid, { accountType });
 

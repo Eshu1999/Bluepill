@@ -44,28 +44,51 @@ export const ViewProfilePageContent = ({ viewingProfile, currentUser, currentUse
         setRequestStatus('sending');
         setError(null);
 
-        const result = await sendFriendRequest(viewingProfile.id);
-        if (result.success) {
-            setRequestStatus('sent');
-            toast({ title: 'Request Sent!', description: result.message });
-        } else {
+        const firebaseUser = auth.currentUser;
+        if (!firebaseUser) {
+            setError("You must be logged in to send a request.");
             setRequestStatus('error');
-            setError(result.error || 'An unknown error occurred.');
-            toast({ variant: 'destructive', title: 'Error', description: result.error });
+            return;
+        }
+
+        try {
+            const idToken = await firebaseUser.getIdToken(true);
+            const result = await sendFriendRequest(idToken, viewingProfile.id);
+            if (result.success) {
+                setRequestStatus('sent');
+                toast({ title: 'Request Sent!', description: result.message });
+            } else {
+                throw new Error(result.error);
+            }
+        } catch(e: any) {
+             setRequestStatus('error');
+            setError(e.message || 'An unknown error occurred.');
+            toast({ variant: 'destructive', title: 'Error', description: e.message });
         }
     }
     
     const handleStartChat = async () => {
-        const result = await createOrGetChat(viewingProfile.id);
-        if (result.error) {
-            toast({ variant: 'destructive', title: 'Error', description: result.error });
-        } else {
-            router.push(`/messages?chatId=${result.chatId}`);
+        const firebaseUser = auth.currentUser;
+        if (!firebaseUser) {
+            toast({ variant: 'destructive', title: 'Authentication Error', description: "You must be logged in." });
+            return;
+        }
+        
+        try {
+            const idToken = await firebaseUser.getIdToken(true);
+            const result = await createOrGetChat(idToken, viewingProfile.id);
+            if (result.error) {
+                toast({ variant: 'destructive', title: 'Error', description: result.error });
+            } else {
+                router.push(`/messages?chatId=${result.chatId}`);
+            }
+        } catch (e: any) {
+             toast({ variant: 'destructive', title: 'Error', description: e.message || 'Could not start chat.' });
         }
     }
 
     const ActionButtons = () => {
-        if (isOwnProfile || viewingProfile.accountType === 'chemist') {
+        if (isOwnProfile || viewingProfile.accountType === 'doctor') {
             return null;
         }
 
@@ -108,8 +131,8 @@ export const ViewProfilePageContent = ({ viewingProfile, currentUser, currentUse
                         <div className="text-center sm:text-left flex-1">
                             <div className="flex items-center justify-center sm:justify-start gap-3">
                                 <CardTitle className="font-headline text-4xl">{viewingProfile.name}</CardTitle>
-                                {viewingProfile?.accountType === 'chemist' && (
-                                    <Badge variant="outline" className="text-base">Chemist</Badge>
+                                {viewingProfile?.accountType === 'doctor' && (
+                                    <Badge variant="outline" className="text-base">Doctor</Badge>
                                 )}
                                 {getConnectionStatusBadge()}
                             </div>
